@@ -5,7 +5,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: '>=3.1.1 <4.0.0'
+  sdk: '^3.1.0'
 
 dependencies:
   flutter:
@@ -16,6 +16,8 @@ dependencies:
   freezed_annotation: ^2.2.0
   json_annotation: ^4.8.1
   cupertino_icons: ^1.0.2
+  positive_num: ^1.0.8+1
+  
 
 dev_dependencies:
   flutter_test:
@@ -25,6 +27,7 @@ dev_dependencies:
   freezed: ^2.3.5
   json_serializable: ^6.6.2
   flutter_gen: ^5.3.1
+  mocktail: ^1.0.1
 
 flutter:
   uses-material-design: true

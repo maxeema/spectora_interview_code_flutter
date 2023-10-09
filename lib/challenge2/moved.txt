@@ -1,0 +1,3 @@
+Tests solutions of the challenge2 moved to the <project root>/test/challenge1 dir.
+To follow established practices to put tests into the /test of the project root dir.
+Also, to provide ability to run all tests by single command: flutter test.

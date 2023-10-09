@@ -1,28 +1,40 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:positive_num/positive_num.dart';
+import 'package:spectora_interview_code_flutter/challenge1/heavy_random_generator.dart';
+import 'package:spectora_interview_code_flutter/platform_helper.dart';
 
 class HeavyOperationViewModel {
+  static const timerInterval = Duration(milliseconds: 1000);
+
   final Ref ref;
 
-  final valueProvider = StateProvider<int>((ref) => 0);
+  final valueProvider = StateProvider<PositiveNum<int>?>((ref) => null);
+
+  Timer? _timer;
 
   HeavyOperationViewModel(this.ref);
 
-  init() async {
-    Timer.periodic(const Duration(seconds: 1), (timer) {
-      int total = 0;
-      final timet = timer.tick;
+  init() {
+    _timer ??= Timer.periodic(timerInterval, (timer) async {
+      final args = (seed: timer.tick, fallback: 1);
+      final PositiveNum<int> total;
 
-      /// Performs an iteration of the specified count
-      for (int i = 1; i < 999999999; i++) {
-        /// Multiplies each index by the multiplier and computes the total
-        total += (i * timet);
+      if (PlatformHelper.canUseIsolates) {
+        total = await compute(HeavyRandomGenerator.generate, args);
+      } else {
+        total = HeavyRandomGenerator.generate(args);
       }
 
-      total = total ~/ 1000000;
-
-      ref.read(valueProvider.notifier).state = total;
+      if (timer.isActive) {
+        ref.read(valueProvider.notifier).state = total;
+      }
     });
+  }
+
+  void dispose() {
+    _timer?.cancel();
   }
 }

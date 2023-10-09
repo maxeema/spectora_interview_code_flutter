@@ -3,7 +3,5 @@ import 'package:spectora_interview_code_flutter/challenge1/viewmodel/heavy_opera
 
 class ViewModelProviders {
   static final heavyOperationViewModel =
-      AutoDisposeProvider<HeavyOperationViewModel>((ref) {
-    return HeavyOperationViewModel(ref);
-  });
+      AutoDisposeProvider(HeavyOperationViewModel.new);
 }
