@@ -1,0 +1,26 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "Challenge 1",
+        "request": "launch",
+        "type": "dart",
+        "flutterMode": "debug",
+        "program": "./lib/challenge1/main.dart",
+      },
+      {
+        "name": "Challenge 2 (Tests)",
+        "request": "launch",
+        "type": "dart",
+        "program": "./lib/challenge2/test/",
+        "flutterMode": "debug"
+      },
+      {
+        "name": "Challenge 3",
+        "request": "launch",
+        "type": "dart",
+        "flutterMode": "debug",
+        "program": "./lib/challenge3/main.dart",
+      },
+    ]
+  }
