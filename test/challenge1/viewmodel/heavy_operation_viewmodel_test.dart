@@ -1,49 +1,59 @@
 // ignore_for_file: depend_on_referenced_packages
 
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:positive_num/positive_num.dart';
+import 'package:spectora_interview_code_flutter/challenge1/providers/viewmodel_providers.dart';
 
-import 'package:spectora_interview_code_flutter/challenge1/view/heavy_operation_view.dart';
 import 'package:spectora_interview_code_flutter/challenge1/viewmodel/heavy_operation_viewmodel.dart';
 
 import '../../test_helpers.dart';
 
 void main() {
-  group('HeavyOperationView', () {
-    testWidgets(
-        'Ensure UI elements presented and the first generated number appears',
-        (WidgetTester tester) async {
-      await tester.pumpWidget(
-        const ProviderScope(
-          child: MaterialApp(
-            home: HeavyOperationView(),
-          ),
-        ),
-      );
+  group('HeavyOperationViewModel', () {
+    late ProviderContainer container;
+    late HeavyOperationViewModel model;
 
-      // This pump() uses to make Timer.periodic() callbacks workable in tests.
-      await tester.pump(HeavyOperationViewModel.timerInterval);
+    setUp(() {
+      container = ProviderContainer();
+      model = container.read(ViewModelProviders.heavyOperationViewModel);
+    });
 
-      expect(find.byType(CircularProgressIndicator), findsOneWidget);
+    tearDown(() {
+      model.dispose();
+      container.dispose();
+    });
 
-      final textFinder = find.byKey(HeavyOperationView.numberTextKey);
-      expect(textFinder, findsOneWidget);
+    test('model has no value then generates new numbers', () async {
+      const numbersToGenerate = 2;
 
-      // Wait until the first number text populated
-      await untilTrue(() {
-        final text = tester.widget<Text>(textFinder).data;
-        return text != '';
+      // Ensure no number by default
+      expect(container.read(model.valueProvider), null);
+
+      // Init model
+      model.init();
+
+      final generated = <PositiveNum<int>>[];
+
+      late final ProviderSubscription<PositiveNum<int>?> subscription;
+      subscription = container.listen(model.valueProvider, (previous, next) {
+        expect(next, isNotNull);
+        generated.add(next!);
+        if (generated.length == numbersToGenerate) {
+          subscription.close();
+        }
       });
 
-      // Ensure that text is not empty
-      final text = tester.widget<Text>(textFinder).data;
-      expect(text, isNotNull);
+      expect(generated.length, 0);
 
-      // Ensure that text is number and positive
-      final number = int.tryParse(text!);
-      expect(number, isA<int>());
-      expect(number, isPositive);
+      await untilTrue(() {
+        return generated.length == numbersToGenerate;
+      });
+
+      // Ensure model generated N numbers
+      expect(generated.length, numbersToGenerate);
+
+      expect(container.read(model.valueProvider), generated.last);
     });
   });
 }
