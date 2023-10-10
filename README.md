@@ -4,7 +4,7 @@ This <b>solved</b> branch contains results of solving
  original challenges located at the <b>original</b> branch.
 
 If you are interested in the original assessment source code
- and its requirements, switch source to the <b>original</b> branch.
+ and its requirements, switch to the <b>original</b> branch.
 
  > git checkout original
 
