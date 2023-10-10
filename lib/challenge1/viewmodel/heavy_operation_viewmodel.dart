@@ -19,13 +19,12 @@ class HeavyOperationViewModel {
 
   init() {
     _timer ??= Timer.periodic(timerInterval, (timer) async {
-      final args = (seed: timer.tick, fallback: 1);
       final PositiveInt total;
 
       if (PlatformHelper.canUseIsolates) {
-        total = await compute(HeavyRandomGenerator.generate, args);
+        total = await compute(HeavyRandomGenerator.generate, timer.tick);
       } else {
-        total = HeavyRandomGenerator.generate(args);
+        total = HeavyRandomGenerator.generate(timer.tick);
       }
 
       if (timer.isActive) {

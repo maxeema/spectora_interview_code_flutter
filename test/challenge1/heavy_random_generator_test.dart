@@ -11,7 +11,7 @@ void main() {
       final generated = <PositiveInt>[];
 
       for (final seed in seeds) {
-        final random = HeavyRandomGenerator.generate((seed: seed, fallback: 1));
+        final random = HeavyRandomGenerator.generate(seed);
         expect(random, isA<PositiveInt>());
         expect(random.value, isPositive);
         expect(generated, isNot(contains(random)));
