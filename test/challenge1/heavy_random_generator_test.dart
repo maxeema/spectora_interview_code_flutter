@@ -8,11 +8,11 @@ void main() {
         'generate() produces different positive numbers for different seed values',
         () async {
       const seeds = [-7766279331452, 3314527766279, -1, 0, 50, 100];
-      final generated = <PositiveNum<int>>[];
+      final generated = <PositiveInt>[];
 
       for (final seed in seeds) {
         final random = HeavyRandomGenerator.generate((seed: seed, fallback: 1));
-        expect(random, isA<PositiveNum<int>>());
+        expect(random, isA<PositiveInt>());
         expect(random.value, isPositive);
         expect(generated, isNot(contains(random)));
         generated.add(random);

@@ -33,9 +33,9 @@ void main() {
       // Init model
       model.init();
 
-      final generated = <PositiveNum<int>>[];
+      final generated = <PositiveInt>[];
 
-      late final ProviderSubscription<PositiveNum<int>?> subscription;
+      late final ProviderSubscription<PositiveInt?> subscription;
       subscription = container.listen(model.valueProvider, (previous, next) {
         expect(next, isNotNull);
         generated.add(next!);

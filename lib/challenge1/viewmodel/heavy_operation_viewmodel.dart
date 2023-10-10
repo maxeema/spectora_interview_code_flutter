@@ -11,7 +11,7 @@ class HeavyOperationViewModel {
 
   final Ref ref;
 
-  final valueProvider = StateProvider<PositiveNum<int>?>((ref) => null);
+  final valueProvider = StateProvider<PositiveInt?>((ref) => null);
 
   Timer? _timer;
 
@@ -20,7 +20,7 @@ class HeavyOperationViewModel {
   init() {
     _timer ??= Timer.periodic(timerInterval, (timer) async {
       final args = (seed: timer.tick, fallback: 1);
-      final PositiveNum<int> total;
+      final PositiveInt total;
 
       if (PlatformHelper.canUseIsolates) {
         total = await compute(HeavyRandomGenerator.generate, args);

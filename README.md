@@ -22,8 +22,10 @@ To run the solution of the <b>challenge1</b> execute next command
 
 > flutter run lib/challenge1/main.dart
 
-### Run(test) challenge2
-Assuming that "challenge2" is about writing tests to the "challenge1" sources.
+### Run challenge2
+Assuming that "challenge2" is about writing tests to the "challenge1" sources,
+its solution is located at "test/challenge1".
+
 To run the solution of the <b>challenge2</b> execute next command
 
 > flutter test test/challenge1

@@ -16,7 +16,7 @@ dependencies:
   freezed_annotation: ^2.2.0
   json_annotation: ^4.8.1
   cupertino_icons: ^1.0.2
-  positive_num: ^1.0.8+1
+  positive_num: ^2.0.0
   
 
 dev_dependencies:

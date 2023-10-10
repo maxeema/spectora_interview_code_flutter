@@ -6,7 +6,7 @@ import 'package:positive_num/positive_num.dart';
 class HeavyRandomGenerator {
   HeavyRandomGenerator._();
 
-  static PositiveNum<int> generate(({int seed, int fallback}) args) {
+  static PositiveInt generate(({int seed, int fallback}) args) {
     var total = 0;
 
     // Performs an iteration of the specified count
@@ -19,6 +19,6 @@ class HeavyRandomGenerator {
 
     final abs = total.abs();
 
-    return PositiveNum.create(abs > 0 ? abs : args.fallback).instance!;
+    return PositiveInt.create(abs > 0 ? abs : args.fallback).instance!;
   }
 }
