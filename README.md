@@ -1,12 +1,12 @@
 # Solved "Spectora Mobile Flutter Technical Interview" assessment
 
 This <b>solved</b> branch contains results of solving
- original challenges located at the <b>orig</b> branch.
+ original challenges located at the <b>original</b> branch.
 
 If you are interested in the original assessment source code
- and its requirements, switch source to the <b>orig</b> branch.
+ and its requirements, switch source to the <b>original</b> branch.
 
- > git checkout orig
+ > git checkout original
 
 Then follow instructions to complete each challenge.
 Find README.md in each challenge dir:
