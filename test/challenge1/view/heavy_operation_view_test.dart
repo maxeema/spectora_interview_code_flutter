@@ -42,7 +42,7 @@ void main() {
       final number = tester.widget<Text>(numberFinder).data;
       expect(number, isNotNull);
 
-      // Ensure that text is number and positive
+      // Ensure that the number text is integer and positive
       final intValue = int.tryParse(number!);
       expect(intValue, isA<int>());
       expect(intValue, isPositive);
