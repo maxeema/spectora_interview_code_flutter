@@ -20,11 +20,11 @@ void main() {
         ),
       );
 
-      final textFinder = find.byKey(HeavyOperationView.numberTextKey);
-      expect(textFinder, findsOneWidget);
+      final numberFinder = find.byKey(HeavyOperationView.numberTextKey);
+      expect(numberFinder, findsOneWidget);
 
-      // Ensure that text is empty by default
-      expect(tester.widget<Text>(textFinder).data, (text) => text == '');
+      // Ensure that the number text is empty by default
+      expect(tester.widget<Text>(numberFinder).data, (text) => text == '');
 
       // Wait for the first generated number.
       // This pump() uses to make Timer.periodic() callbacks workable in tests.
@@ -34,18 +34,18 @@ void main() {
 
       // Wait until the first number populated
       await untilTrue(() {
-        final text = tester.widget<Text>(textFinder).data;
-        return text != '';
+        final number = tester.widget<Text>(numberFinder).data;
+        return number!.isNotEmpty;
       });
 
-      // Ensure that text now is not empty
-      final text = tester.widget<Text>(textFinder).data;
-      expect(text, isNotNull);
+      // Ensure that the number text is not empty anymore
+      final number = tester.widget<Text>(numberFinder).data;
+      expect(number, isNotNull);
 
       // Ensure that text is number and positive
-      final number = int.tryParse(text!);
-      expect(number, isA<int>());
-      expect(number, isPositive);
+      final intValue = int.tryParse(number!);
+      expect(intValue, isA<int>());
+      expect(intValue, isPositive);
     });
   });
 }
