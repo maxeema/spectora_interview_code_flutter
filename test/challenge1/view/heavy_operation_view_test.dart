@@ -20,21 +20,25 @@ void main() {
         ),
       );
 
+      final textFinder = find.byKey(HeavyOperationView.numberTextKey);
+      expect(textFinder, findsOneWidget);
+
+      // Ensure that text is empty by default
+      expect(tester.widget<Text>(textFinder).data, (text) => text == '');
+
+      // Wait for the first generated number.
       // This pump() uses to make Timer.periodic() callbacks workable in tests.
       await tester.pump(HeavyOperationViewModel.timerInterval);
 
       expect(find.byType(CircularProgressIndicator), findsOneWidget);
 
-      final textFinder = find.byKey(HeavyOperationView.numberTextKey);
-      expect(textFinder, findsOneWidget);
-
-      // Wait until the first number text populated
+      // Wait until the first number populated
       await untilTrue(() {
         final text = tester.widget<Text>(textFinder).data;
         return text != '';
       });
 
-      // Ensure that text is not empty
+      // Ensure that text now is not empty
       final text = tester.widget<Text>(textFinder).data;
       expect(text, isNotNull);
 
