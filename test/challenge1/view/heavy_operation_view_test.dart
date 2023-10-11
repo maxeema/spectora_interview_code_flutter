@@ -3,7 +3,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'package:spectora_interview_code_flutter/challenge1/view/heavy_operation_view.dart';
-import 'package:spectora_interview_code_flutter/challenge1/viewmodel/heavy_operation_viewmodel.dart';
 
 import '../../test_helpers.dart';
 
@@ -23,14 +22,16 @@ void main() {
         ),
       );
 
+      expect(progressFinder, findsOneWidget);
       expect(numberFinder, findsOneWidget);
 
       // Ensure that the number text is empty by default
       expect(tester.widget<Text>(numberFinder).data, (text) => text == '');
 
-      // Wait for the first generated number.
-      // This pump() uses to make Timer.periodic() callbacks workable in tests.
-      await tester.pump(HeavyOperationViewModel.timerInterval);
+      // Wait for the first generated number appearance.
+      await tester.untilTrue(
+        () => tester.widget<Text>(numberFinder).data != '',
+      );
 
       expect(progressFinder, findsOneWidget);
 
