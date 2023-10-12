@@ -41,11 +41,19 @@ To run all tests execute next command
 > flutter test
  
 ## Run on MAC (as a native app)
-You can run and debug project on your Mac as a native app
+You can run and debug the project on your Mac as a native app
 without need of Simulator or Emulator.
-Just execute next command
 
-> flutter run -d macos lib/challenge1/main.dart
+> flutter run lib/challenge1/main.dart -d macos
+
+> flutter run lib/challenge3/main.dart -d macos
+
+## Run in Chrome (as a web app)
+You can run and debug the project in the Chrome browser.s
+
+> flutter run lib/challenge1/main.dart -d chrome
+
+> flutter run lib/challenge3/main.dart -d chrome
 
 
 
