@@ -17,6 +17,7 @@ dependencies:
   json_annotation: ^4.8.1
   cupertino_icons: ^1.0.2
   positive_num: ^2.0.0
+  universal_io: ^2.2.2
   
 
 dev_dependencies:
