@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -21,7 +23,10 @@ void main() {
       providerContainer.dispose();
     });
 
-    testWidgets('When tap on FAB it adds new comment to the ListView',
+    final listFinder = find.byType(ListView);
+    final fabFinder = find.byType(FloatingActionButton);
+
+    testWidgets('when tap FAB a new comment added to the ListView',
         (WidgetTester tester) async {
       const mockComment = Comment(
           id: '000',
@@ -45,28 +50,23 @@ void main() {
         ),
       );
 
-      expect(find.byType(ListView), findsOneWidget);
+      expect(fabFinder, findsOneWidget);
 
-      expect(find.byType(FloatingActionButton), findsOneWidget);
-
-      final listViewFind = find.byType(ListView);
-      var childrenDelegate = tester
-          .widget<ListView>(listViewFind)
-          .childrenDelegate as SliverChildBuilderDelegate;
-
-      // Ensures mock that ListView is empty without mock comment
-      expect(childrenDelegate.childCount, 0);
-      expect(find.text(mockComment.value.toString()), findsNothing);
-      expect(find.text(mockComment.name), findsNothing);
-      expect(find.text(mockComment.description), findsNothing);
+      expect(listFinder, findsNothing);
 
       // Tap on Floating Action Button to add mock comment to ListView
-      await tester.tap(find.byType(FloatingActionButton));
+      await tester.tap(fabFinder);
+
+      await tester.waitFor(listFinder);
+
+      // Ensures auto-scrolling to the new comment animation completed.
       await tester.pumpAndSettle();
 
       // Ensures mock comment added to the ListView
-      childrenDelegate = tester.widget<ListView>(listViewFind).childrenDelegate
-          as SliverChildBuilderDelegate;
+      final childrenDelegate = tester
+          .widget<ListView>(listFinder)
+          .childrenDelegate as SliverChildBuilderDelegate;
+
       expect(childrenDelegate.childCount, 1);
       expect(find.text(mockComment.value.toString()), findsOneWidget);
       expect(find.text(mockComment.name), findsOneWidget);
