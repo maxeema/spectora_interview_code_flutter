@@ -1,10 +1,9 @@
 import 'dart:async';
 
-import 'package:flutter/foundation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:positive_num/positive_num.dart';
 import 'package:spectora_interview_code_flutter/challenge1/heavy_random_generator.dart';
-import 'package:spectora_interview_code_flutter/platform_helper.dart';
+import 'package:spectora_interview_code_flutter/compute_compat.dart';
 
 class HeavyOperationViewModel {
   static const timerInterval = Duration(milliseconds: 1000);
@@ -21,11 +20,10 @@ class HeavyOperationViewModel {
     _timer ??= Timer.periodic(timerInterval, (timer) async {
       final PositiveInt total;
 
-      if (PlatformHelper.canUseIsolates) {
-        total = await compute(HeavyRandomGenerator.generate, timer.tick);
-      } else {
-        total = HeavyRandomGenerator.generate(timer.tick);
-      }
+      total = await ComputeCompat.execute(
+        (seed) => Future.value(HeavyRandomGenerator.generate(seed!)),
+        timer.tick,
+      );
 
       if (timer.isActive) {
         ref.read(valueProvider.notifier).state = total;
