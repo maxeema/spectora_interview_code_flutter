@@ -46,33 +46,37 @@ class CommentsView extends HookConsumerWidget {
         },
         child: const Icon(Icons.add),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: ListView.builder(
-          controller: scrollController,
-          itemCount: comments.length,
-          itemBuilder: (context, idx) {
-            final comment = comments[idx];
-            return Card(
-              key: Key('comment-${comment.id}'),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: ListTile(
-                  leading: Text(
-                    '${comment.value}',
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
-                  ),
-                  title: Text(
-                    comment.name,
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
-                  ),
-                  subtitle: Text(comment.description),
-                ),
+      body: comments.isEmpty
+          ? const Center(child: Text('Tap the FAB to add a comment'))
+          : Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: ListView.builder(
+                controller: scrollController,
+                itemCount: comments.length,
+                itemBuilder: (context, idx) {
+                  final comment = comments[idx];
+                  return Card(
+                    key: Key('comment-${comment.id}'),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: ListTile(
+                        leading: Text(
+                          '${comment.value}',
+                          style: const TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 15),
+                        ),
+                        title: Text(
+                          comment.name,
+                          style: const TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 15),
+                        ),
+                        subtitle: Text(comment.description),
+                      ),
+                    ),
+                  );
+                },
               ),
-            );
-          },
-        ),
-      ),
+            ),
     );
   }
 }
