@@ -4,8 +4,7 @@ import 'package:spectora_interview_code_flutter/challenge1/heavy_random_generato
 
 void main() {
   group('HeavyRandomGenerator', () {
-    test(
-        'generate() produces different positive numbers for different seed values',
+    test('generate() produces different positive numbers for different seed',
         () async {
       const seeds = [-7766279331452, 3314527766279, -1, 0, 50, 100];
       final generated = <PositiveInt>[];

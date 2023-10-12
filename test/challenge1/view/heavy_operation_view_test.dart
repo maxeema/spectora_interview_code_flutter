@@ -11,8 +11,7 @@ void main() {
   final progressFinder = find.byType(CircularProgressIndicator);
 
   group('HeavyOperationView', () {
-    testWidgets(
-        'Ensure UI elements presented and the first generated number appears',
+    testWidgets('ensure the first generated number appears',
         (WidgetTester tester) async {
       await tester.pumpWidget(
         const ProviderScope(
@@ -25,21 +24,15 @@ void main() {
       expect(progressFinder, findsOneWidget);
       expect(numberFinder, findsOneWidget);
 
-      // Ensure that the number text is empty by default
       expect(tester.widget<Text>(numberFinder).data, (text) => text == '');
 
-      // Wait for the first generated number appearance.
       await tester.untilTrue(
         () => tester.widget<Text>(numberFinder).data != '',
       );
 
-      expect(progressFinder, findsOneWidget);
-
-      // Ensure that the number text is not empty anymore
       final number = tester.widget<Text>(numberFinder).data;
       expect(number, isNotNull);
 
-      // Ensure that the number text is integer and positive
       final intValue = int.tryParse(number!);
       expect(intValue, isA<int>());
       expect(intValue, isPositive);
