@@ -55,6 +55,35 @@ You can run and debug the project in the Chrome browser.
 
 > flutter run lib/challenge3/main.dart -d chrome
 
+## Run on Linux (as a native app)
+You can run and debug the project on your Linux machine as a native app
+without need of Simulator or Emulator.
+
+> flutter run lib/challenge1/main.dart -d linux
+
+> flutter run lib/challenge3/main.dart -d linux
+
+# ## Run on other platforms (Android, iOS)
+If you want to test the app on Emulator, Simulator, or a real device,
+firstly add a target platform support to the project like that.
+
+> flutter create . --platform android
+
+Then start an Emulator or connect a real device.
+And run the app.
+> flutter run
+
+If you will face a prompt with different devices to run on,
+then simply choose your Emulator or Android device.
+
+# ## Run in release mode
+You always can see how the code works in release(production) mode
+that executes faster and much performant (but takes bit more seconds to be compiled),
+just add the "--release" argument like that.
+
+> flutter run --release
+> 
+> flutter run lib/challenge1/main.dart -d chrome --release
 
 
  © Max Shemetov, 2023
