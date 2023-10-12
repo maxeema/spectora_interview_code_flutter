@@ -1,4 +1,4 @@
-# Solved "Spectora Mobile Flutter Technical Interview" assessment
+# Solved the "Spectora Mobile Flutter Technical Interview" assessment
 
 This <b>solved</b> branch contains results of solving
  original challenges located at the <b>original</b> branch.
@@ -49,7 +49,7 @@ without need of Simulator or Emulator.
 > flutter run lib/challenge3/main.dart -d macos
 
 ## Run in Chrome (as a web app)
-You can run and debug the project in the Chrome browser.s
+You can run and debug the project in the Chrome browser.
 
 > flutter run lib/challenge1/main.dart -d chrome
 
@@ -57,4 +57,4 @@ You can run and debug the project in the Chrome browser.s
 
 
 
- © Max Shemetov & Spectora, 2023, MIT License
+ © Max Shemetov, 2023
